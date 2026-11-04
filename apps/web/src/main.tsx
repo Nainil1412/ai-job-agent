@@ -1,6 +1,6 @@
 import {StrictMode,useEffect,useState} from 'react'; import {createRoot} from 'react-dom/client'; import './style.css';
 type Match={job:{id:string;companyName:string;title:string;location?:string;workMode:string;verification:string;applyUrl:string};score:number;reasons:string[];status:string};
-const API='http://localhost:4000';
+const API=import.meta.env.VITE_API_URL??'http://localhost:4000';
 function App(){const[token,setToken]=useState(localStorage.getItem('job-agent-token')??'');const[email,setEmail]=useState('');const[password,setPassword]=useState('');const[name,setName]=useState('');const[register,setRegister]=useState(false);const[matches,setMatches]=useState<Match[]>([]);const[error,setError]=useState('');const[loading,setLoading]=useState(false);
  const load=()=>fetch(`${API}/api/jobs/recommended`,{headers:{Authorization:`Bearer ${token}`}}).then(r=>r.ok?r.json():Promise.reject(new Error('Session expired'))).then(d=>setMatches(d.data));
  useEffect(()=>{if(token)load().catch(e=>{setError(e.message);setToken('');localStorage.removeItem('job-agent-token');});},[token]);
