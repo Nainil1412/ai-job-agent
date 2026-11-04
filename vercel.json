@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm run build -w @ai-job-agent/web",
+  "outputDirectory": "apps/web/dist",
+  "installCommand": "npm install"
+}

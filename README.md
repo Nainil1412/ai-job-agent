@@ -92,6 +92,14 @@ The verified E2E flow covers registration, authenticated profile readback, resum
 
 Passwords are hashed, user routes require JWTs, resume uploads are limited and allowlisted, stored resume text is truncated, and connector application URLs must be HTTPS. Job descriptions are untrusted content. The system does not scrape or bypass LinkedIn, Indeed, Naukri, Foundit, CAPTCHAs, login walls, rate limits, or platform terms. Use authorized APIs, employer feeds, licensed feeds, or partnerships only.
 
+## Free deployment plan
+
+- Neon free PostgreSQL: create a project and use its pooled `DATABASE_URL` as the Render API `DATABASE_URL` secret.
+- Render free web service: deploy the API from `render.yaml`, set `DATABASE_URL`, `JWT_SECRET`, and `WEB_ORIGIN`.
+- Vercel Hobby: import this repository, use the committed `vercel.json`, and set `VITE_API_URL` to the deployed Render API URL.
+
+Render free services can sleep when idle. Neon and Vercel free-tier limits, quotas, and policies apply and can change.
+
 ## Production roadmap
 
 The local MVP is complete for the core product journey. Production hardening still requires PostgreSQL migrations/transactions, encrypted private resume storage, malware scanning, durable queues and leader locks, scheduled source syncs, timezone-aware daily digests, SMTP delivery with unsubscribe/idempotency, refresh-token rotation, rate limiting, audit logs, backups, browser E2E tests, and separate API/worker/web deployment.
