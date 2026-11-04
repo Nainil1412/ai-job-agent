@@ -71,7 +71,7 @@ npm run dev
 Web: http://localhost:5173
 API: http://localhost:4000/health
 
-The local JSON store is created automatically. Optional PostgreSQL:
+The local JSON store is created automatically. When `DATABASE_URL` points to Neon PostgreSQL, the API creates an `app_state` table and persists the complete store in JSONB. Optional local PostgreSQL:
 
 ```bash
 docker compose up -d postgres

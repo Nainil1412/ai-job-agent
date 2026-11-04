@@ -12,6 +12,8 @@ services:
         generateValue: true
       - key: DATA_DIR
         value: /tmp/ai-job-agent-data
+      - key: DATABASE_URL
+        sync: false
       - key: WEB_ORIGIN
         sync: false
   - type: web
