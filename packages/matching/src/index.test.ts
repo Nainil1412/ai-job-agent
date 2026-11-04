@@ -1,0 +1,3 @@
+import {describe,expect,it} from 'vitest'; import {rankJobs} from './index.js'; import type {Job,Preferences} from '@ai-job-agent/shared';
+const p:Preferences={roles:['Backend Engineer'],locations:[],workModes:['remote'],minScore:50,excludedEmployers:[]}; const j:Job={id:'1',source:'demo',externalId:'1',companyName:'Acme',title:'Backend Engineer',description:'Node.js PostgreSQL',requiredSkills:['Node.js','PostgreSQL'],workMode:'remote',applyUrl:'https://acme.example/jobs/1',lastSeenAt:new Date().toISOString(),verification:'high_confidence'};
+describe('matching',()=>it('ranks and explains a match',()=>{const [m]=rankJobs([j],p);expect(m.score).toBeGreaterThan(70);expect(m.reasons.join(' ')).toContain('Node.js');}));

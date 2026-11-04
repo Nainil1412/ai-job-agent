@@ -1,0 +1,5 @@
+import { z } from 'zod';
+export const WorkMode=z.enum(['remote','hybrid','onsite','unknown']); export type WorkMode=z.infer<typeof WorkMode>;
+export const JobSchema=z.object({id:z.string(),source:z.string(),externalId:z.string(),companyName:z.string(),title:z.string(),description:z.string(),requiredSkills:z.array(z.string()),location:z.string().optional(),workMode:WorkMode,salaryMin:z.number().optional(),salaryMax:z.number().optional(),postedAt:z.string().optional(),applyUrl:z.string().url(),canonicalUrl:z.string().url().optional(),lastSeenAt:z.string(),verification:z.enum(['high_confidence','needs_review','high_risk'])}); export type Job=z.infer<typeof JobSchema>;
+export const PreferenceSchema=z.object({roles:z.array(z.string()).min(1),locations:z.array(z.string()).default([]),workModes:z.array(WorkMode).default(['remote','hybrid','onsite']),minSalary:z.number().optional(),minScore:z.number().min(0).max(100).default(60),excludedEmployers:z.array(z.string()).default([])}); export type Preferences=z.infer<typeof PreferenceSchema>;
+export type Match={job:Job;score:number;reasons:string[];matchedSkills:string[];status:'new'|'saved'|'dismissed'|'applied'};

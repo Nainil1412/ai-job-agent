@@ -1,0 +1,8 @@
+{
+  "name": "ai-job-agent",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {"dev":"concurrently -k \"npm run dev -w @ai-job-agent/api\" \"npm run dev -w @ai-job-agent/web\"","build":"npm run build -w @ai-job-agent/shared && npm run build -w @ai-job-agent/matching && npm run build -w @ai-job-agent/job-connectors && npm run build -w @ai-job-agent/api && npm run build -w @ai-job-agent/web","test":"npm run test -w @ai-job-agent/matching && npm run test -w @ai-job-agent/api","typecheck":"npm run typecheck -w @ai-job-agent/shared && npm run typecheck -w @ai-job-agent/matching && npm run typecheck -w @ai-job-agent/job-connectors && npm run typecheck -w @ai-job-agent/api && npm run typecheck -w @ai-job-agent/web","format:check":"prettier --check ."},
+  "devDependencies": {"@types/react":"^19.0.8","@types/react-dom":"^19.0.3","concurrently":"^9.1.2","prettier":"^3.5.3","typescript":"^5.8.2"}
+}
