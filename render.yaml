@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: ai-job-agent-api
+    name: ai-job-agent-api-live
     runtime: node
     plan: free
     buildCommand: npm install && npm run build -w @ai-job-agent/shared && npm run build -w @ai-job-agent/matching && npm run build -w @ai-job-agent/job-connectors && npm run build -w @ai-job-agent/api
@@ -12,18 +12,28 @@ services:
         value: production
       - key: JWT_SECRET
         generateValue: true
+      - key: RESUME_ENCRYPTION_KEY
+        generateValue: true
+      - key: WORKER_SECRET
+        generateValue: true
       - key: DATA_DIR
         value: /tmp/ai-job-agent-data
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: ai-job-agent-db
+          property: connectionString
       - key: WEB_ORIGIN
-        value: https://ai-job-agent-web.onrender.com
+        value: https://ai-job-agent-web-live.onrender.com
     healthCheckPath: /health/ready
   - type: web
-    name: ai-job-agent-web
+    name: ai-job-agent-web-live
     runtime: static
     buildCommand: npm install && npm run build -w @ai-job-agent/web
     staticPublishPath: apps/web/dist
     envVars:
       - key: VITE_API_URL
-        value: https://ai-job-agent-api.onrender.com
+        value: https://ai-job-agent-api-live.onrender.com
+databases:
+  - name: ai-job-agent-db
+    databaseName: ai_job_agent
+    plan: free

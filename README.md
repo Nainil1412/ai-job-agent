@@ -100,8 +100,10 @@ Passwords are hashed, user routes require JWTs, resume uploads are limited and a
 
 Render free services can sleep when idle. Neon and Vercel free-tier limits, quotas, and policies apply and can change.
 
-## Production roadmap
+## Production status and roadmap
 
-The local MVP is complete for the core product journey. Production hardening still requires PostgreSQL migrations/transactions, encrypted private resume storage, malware scanning, durable queues and leader locks, scheduled source syncs, timezone-aware daily digests, SMTP delivery with unsubscribe/idempotency, refresh-token rotation, rate limiting, audit logs, backups, browser E2E tests, and separate API/worker/web deployment.
+The live Render demo is available at `https://ai-job-agent-web-live.onrender.com` with the API at `https://ai-job-agent-api-live.onrender.com`. The code now includes production secret checks, AES-256-GCM resume encryption when `RESUME_ENCRYPTION_KEY` is configured, awaited PostgreSQL writes, readiness checks, rate limiting, worker authorization, and browser E2E coverage.
+
+The Render Blueprint provisions PostgreSQL when the account permits a free database. The currently running demo uses ephemeral storage because this Render workspace has reached its free-database limit; configure a dedicated PostgreSQL/Neon `DATABASE_URL` before using real user data. Remaining provider-dependent work includes malware scanning, scheduled authorized source syncs, durable queue/leader-lock processing, timezone-aware SMTP digests with unsubscribe/idempotency, refresh-token rotation, audit logs, and backups.
 
 Never commit `.env`, tokens, passwords, uploaded resumes, or `data/`.
