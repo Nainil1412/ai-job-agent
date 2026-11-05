@@ -18,6 +18,8 @@ services:
         generateValue: true
       - key: WORKER_SECRET
         generateValue: true
+      - key: JOB_SOURCE_REFRESH_INTERVAL_MS
+        value: "21600000"
       - key: DATA_DIR
         value: /tmp/ai-job-agent-data
       - key: DATABASE_URL
