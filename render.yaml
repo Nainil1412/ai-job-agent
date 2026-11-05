@@ -8,6 +8,8 @@ services:
     envVars:
       - key: NODE_VERSION
         value: 20
+      - key: NODE_ENV
+        value: production
       - key: JWT_SECRET
         generateValue: true
       - key: DATA_DIR
@@ -15,7 +17,8 @@ services:
       - key: DATABASE_URL
         sync: false
       - key: WEB_ORIGIN
-        sync: false
+        value: https://ai-job-agent-web.onrender.com
+    healthCheckPath: /health/ready
   - type: web
     name: ai-job-agent-web
     runtime: static
@@ -23,7 +26,4 @@ services:
     staticPublishPath: apps/web/dist
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: ai-job-agent-api
-          property: host
+        value: https://ai-job-agent-api.onrender.com
