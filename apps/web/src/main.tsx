@@ -6,7 +6,7 @@ type Match = { job: { id: string; companyName: string; title: string; location?:
 type Preferences = { roles: string[]; locations: string[]; workModes: string[]; minScore: number; excludedEmployers: string[] };
 type Profile = { resumeName?: string; skills: string[] };
 const API = import.meta.env.VITE_API_URL ?? 'http://localhost:4000';
-const defaults: Preferences = { roles: ['Software Engineer'], locations: [], workModes: ['remote', 'hybrid', 'onsite'], minScore: 55, excludedEmployers: [] };
+const defaults: Preferences = { roles: ['Software Engineer'], locations: [], workModes: ['remote', 'hybrid', 'onsite'], minScore: 35, excludedEmployers: [] };
 const splitList = (value: string) => value.split(',').map((item) => item.trim()).filter(Boolean);
 
 function App() {
